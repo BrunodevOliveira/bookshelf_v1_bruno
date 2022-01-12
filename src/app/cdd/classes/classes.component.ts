@@ -1,5 +1,7 @@
+import { GenerosService } from './../service/generos.service';
 import { Generos } from './../modelos/generos';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-classes',
@@ -8,11 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClassesComponent implements OnInit {
 
-  //em Angular precisamos inicializar  sempre se não gera erro:
-  livrosGeneros: Generos[] = []
+  //Olha o que foi trazido no pacote HTML e observa se esses dados cabem na interface Generos
+  livrosGeneros: Observable <Generos []>
   visaoColunas= ['_idGenero','nomeGenero', 'decimalGenero']
 
-  constructor() { }
+  constructor(private GenerosService: GenerosService) {
+    this.livrosGeneros = GenerosService.listagemGeneros()
+   }
 
   ngOnInit(): void {
   }

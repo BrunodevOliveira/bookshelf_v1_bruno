@@ -1,7 +1,10 @@
+import { AppDialogosComponent } from './../../app-compartilhado/app-dialogos/app-dialogos.component';
 import { GenerosService } from './../service/generos.service';
 import { Generos } from './../modelos/generos';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-classes',
@@ -11,12 +14,26 @@ import { Observable } from 'rxjs';
 export class ClassesComponent implements OnInit {
 
   //Olha o que foi trazido no pacote HTML e observa se esses dados cabem na interface Generos
-  livrosGeneros: Observable <Generos []>
+  //Esse $ serve para identificar que é um observable
+  livrosGeneros$: Observable <Generos []>
   visaoColunas= ['_idGenero','nomeGenero', 'decimalGenero']
 
-  constructor(private GenerosService: GenerosService) {
-    this.livrosGeneros = GenerosService.listagemGeneros()
-   }
+  constructor(private generosService: GenerosService, public dialogo:MatDialog ) {
+    this.livrosGeneros$ = generosService.listagemGeneros()
+      .pipe(
+        catchError(error => {
+          this.abrirDialogoErro('Erro ao carregar a tabela: #BS - ' +error.status)
+          return of([]) //caminho alternativo caso n consiga carregar a página
+        })
+      )
+
+  }
+
+  abrirDialogoErro(errMsg: string) {
+    this.dialogo.open(AppDialogosComponent, {
+      data:errMsg
+    })
+  }
 
   ngOnInit(): void {
   }

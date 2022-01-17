@@ -22,10 +22,10 @@ export class NavegacaoComponent {
   //Controle das rotas do menu. Será gerado utilizando *ngFor
   itensMenu = [
     {linkMenu: '/cdd', labelMenu:'Classificação Dewey', hab:true},
-    {linkMenu: '/fee', labelMenu:'Feed Noticias', hab:true},
-    {linkMenu: '/clube', labelMenu:'Pagina Usuário', hab:true},
-    {linkMenu: '/leitura', labelMenu:'Clubes de leitura', hab:true},
-    {linkMenu: '/estante', labelMenu:'Estante Particular', hab:true},
+    {linkMenu: '/feed', labelMenu:'Feed Noticias', hab:true},
+    {linkMenu: '/clube', labelMenu:'Pagina Usuário', hab:false},
+    {linkMenu: '/leitura', labelMenu:'Clubes de leitura', hab:false},
+    {linkMenu: '/estante', labelMenu:'Estante Particular', hab:false},
   ]
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

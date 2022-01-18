@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+//Pipes são serviços de tradução. Modificam a interface de acordo com o que recebemos do JSON
 @Pipe({
   name: 'pipes'
 })

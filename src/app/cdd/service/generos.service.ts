@@ -15,6 +15,7 @@ export class GenerosService {
 
   listagemGeneros() {
     return this.clienteDados.get<Generos[]>(this.urlAPI) //Ele vai buscar na variável urlAPI o JSON com as informações e vai verificar se esses dados se encaixam na interface Generos
+    //Antes de entregar esses dados, daremos os seguintes tratamentos:
     .pipe(
       delay(500),
       first(),

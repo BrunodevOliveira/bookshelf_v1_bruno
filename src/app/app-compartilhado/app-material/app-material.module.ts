@@ -8,7 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatBadgeModule} from '@angular/material/badge';
 
-
+//Injetores--> são módulos que exporta algo para dentro dos outros módulos
 @NgModule({
   exports: [
     MatButtonModule,

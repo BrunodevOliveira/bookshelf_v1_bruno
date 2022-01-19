@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "bookshelfv1-6e726": {
+      "hosting": {
+        "bookshelf_v1_bruno": [
+          "bookshelfv1-6e726"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "bookshelfv1-6e726"
+  }
+}

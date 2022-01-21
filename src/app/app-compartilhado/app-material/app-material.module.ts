@@ -7,6 +7,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 //Injetores--> são módulos que exporta algo para dentro dos outros módulos
 @NgModule({
@@ -19,6 +22,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatBadgeModule,
+    MatGridListModule,
+    MatMenuModule,
   ]
 })
 export class AppMaterialModule { }

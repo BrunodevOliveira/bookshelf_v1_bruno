@@ -1,17 +1,28 @@
+import { AppCadastroComponent } from './app-cadastro/app-cadastro.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FeedComponent } from './feed/feed.component';
+import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
+const enviarSemLogin = () => redirectUnauthorizedTo(['/app-app-cadastro'])
 
 const routes: Routes = [
-  {path: '', pathMatch:'full', redirectTo:'feed'}, //pathMatch verifica o caminho completo e redirectTo redireciona p feed
+  {path: '', pathMatch:'full', redirectTo:'app-app-cadastro'}, //pathMatch verifica o caminho completo e redirectTo redireciona p feed
+
   {
-    path: 'feed',
-    component: FeedComponent,
+    path:'app-app-cadastro',
+    component: AppCadastroComponent
   },
 
   {
-    path: 'cdd', loadChildren: () => import('./cdd/cdd.module').then(c => c.CddModule)
+    path: 'feed',
+    component: FeedComponent,
+    ...canActivate(enviarSemLogin)
+  },
+
+  {
+    path: 'cdd', loadChildren: () => import('./cdd/cdd.module').then(c => c.CddModule),
+    ...canActivate(enviarSemLogin)
   },
 ];
 

@@ -9,7 +9,7 @@ import { Generos } from './../modelos/generos';
 })
 export class GenerosService {
 
-  private readonly urlAPI = '/assets/generos.json'
+  private readonly urlAPI = '/assets/generos.json' //EndPoint
 
   constructor(private clienteDados: HttpClient) { }
 

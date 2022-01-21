@@ -23,10 +23,18 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <img mat-card-sm-image [width]="lIcone" [height]="aIcone" [src]="iconeGeral" >
-      <button mat-raised-button color="primary" (click)="abrirLogin('Tela de Login')">
-        <mat-icon class="mat-18">login</mat-icon>
-        Login
-      </button>
+      <ng-container *ngIf="usuario$ | async as usuario; else botaoLogin">
+        <button mat-raised-button color="primary" (click)="sairUsuario()">
+          <mat-icon class="mat-18">logout</mat-icon>
+          Logout
+        </button>
+      </ng-container>
+      <ng-template #botaoLogin>
+        <button mat-raised-button color="primary" (click)="abrirLogin('Tela de Login')">
+          <mat-icon class="mat-18">login</mat-icon>
+          Login
+        </button>
+      </ng-template>
       <!-- <span>{{tituloBarra}}</span> -->
     </mat-toolbar>
     <router-outlet></router-outlet>

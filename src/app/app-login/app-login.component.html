@@ -1,4 +1,3 @@
-<h1 mat-dialog-title>Bookshelf Login de Usuário</h1>
 <div mat-dialog-content>
   <mat-card class="example-card">
     <mat-card-header>
@@ -8,9 +7,9 @@
     </mat-card-header>
     <img mat-card-image src="../../assets/imagens/4.png" alt="Banner do login">
     <mat-card-content>
-      <form [formGroup]="formularioLogin" novalidate (ngSubmit)="onSubmit()">
+      <form [formGroup]="formularioLogin" (ngSubmit)="loginFirebase()">
         <mat-form-field>
-          <input matInput placeholder="Email de login">
+          <input matInput placeholder="Email de login" formControlName="email">
           <mat-error *ngIf="email?.errors?.['required']">
             O campo de email não pode estar vazio
           </mat-error>
@@ -19,13 +18,16 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Senha de acesso" type="password">
+          <input matInput placeholder="Senha de acesso" formControlName="senha" type="password">
           <mat-error *ngIf="senha?.errors?.['required']">
             Senha não pode estar vazia
           </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="accent" type="submit">Entrar</button>
-        <button mat-button mat-dialog-close color="primary">Fechar</button>
+        <mat-card-footer>
+          <button mat-raised-button color="accent" type="submit">Entrar</button>
+          <button mat-button mat-dialog-close color="primary">Fechar</button>
+        </mat-card-footer>
+
       </form>
     </mat-card-content>
   </mat-card>

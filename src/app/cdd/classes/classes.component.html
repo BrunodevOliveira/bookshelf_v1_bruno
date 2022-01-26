@@ -1,6 +1,6 @@
 
 <mat-card>
-  <!--Se o observable não chegar na variável livrosGeneros$, fará um carregamento assincrono do spinner loading -->
+  <!-- Assim que chegar os dados no Observable livrosGeneros$, eu armazeno eles na variável livrosGeneros e enquanto essa variável estiver vazia será carregado o loading -->
   <div *ngIf="livrosGeneros$ | async as livrosGeneros; else loading">
     <mat-toolbar color="accent">
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">

@@ -19,6 +19,8 @@ import { PipesPipe } from './app-pipes/pipes.pipe';
   ],
   //O que eu vou usar fora
   exports: [
+    //propriedade que define quais itens (componentes, diretivas e pipes) serão visíveis por outros módulos quando este for importado
+    //Geralmente só é criado quando o módulo foi criado para ser utilizado em outros
     AppDialogosComponent,
     PipesPipe
   ]

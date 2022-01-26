@@ -14,7 +14,7 @@ import { ClassesComponent } from './classes/classes.component';
   ],
   //Tudo que não está dentro dele
   imports: [
-    CommonModule,
+    CommonModule,//importado em todos os módulos exceto no principal
     CddRoutingModule,
     AppMaterialModule,
     AppCompartilhadoModule,

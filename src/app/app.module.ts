@@ -21,6 +21,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { RecaptchaModule } from 'ng-recaptcha';
+
 
 import { environment } from '../environments/environment';
 import { AppCadastroComponent } from './app-cadastro/app-cadastro.component';
@@ -65,7 +67,8 @@ import { NavegacaoComponent } from './navegacao/navegacao.component';
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    HotToastModule.forRoot()
+    HotToastModule.forRoot(),
+    RecaptchaModule,
   ],
   providers: [],//Propriedade que define os serviços que serão utilizados pelos componentes. | Serviços são o elo de ligação entre a aplicação e os dados
   bootstrap: [AppComponent],

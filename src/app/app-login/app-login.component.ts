@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-app-login',
@@ -19,6 +20,8 @@ export class AppLoginComponent {
   });
 
   hasUnitNumber = false
+  tentativas = 0
+  captcha!: string
 
   constructor(
     private loginBuilder: FormBuilder,
@@ -39,6 +42,8 @@ export class AppLoginComponent {
 
   loginFirebase() {
     if(!this.formularioLogin.valid){
+      this.tentativas++
+      this.captcha = ''
       return
     }
     const {email, senha} = this.formularioLogin.value
@@ -51,7 +56,18 @@ export class AppLoginComponent {
       })
     ).subscribe(() => {
       this.rotas.navigate(['/cdd'])
+      this.tentativas = 0
     })
+    setTimeout(() => {
+      this.tentativas++
+      this.captcha = ''
+    }, 700)
+  }
+
+  resolverCaptcha(resposta: string) {
+    this.captcha = resposta
+    this.tentativas = 0
+    // console.log('resolve Recaptcha', resposta)
   }
 
   onSubmit(): void {

@@ -24,13 +24,19 @@
           </mat-error>
         </mat-form-field>
         <mat-card-footer>
-          <button mat-raised-button color="accent" type="submit">Entrar</button>
-          <button mat-button mat-dialog-close color="primary">Fechar</button>
+          <button mat-raised-button color="accent" type="submit" *ngIf="tentativas < 3">Entrar</button>
+          <button mat-button mat-dialog-close color="primary" [ngClass]="{'tentativas': tentativas >= 3}">Fechar</button>
         </mat-card-footer>
-
+        <span *ngIf="tentativas > 0">Numero de tentativas de login: <strong>{{tentativas}}</strong></span>
       </form>
     </mat-card-content>
     <span>Você ainda<strong>não tem cadastro</strong> clique <a routerLink="/app-app-cadastro">aqui</a> e venha fazer parte dessa comunidade de leitores</span>
   </mat-card>
 </div>
+<div [hidden]="captcha" *ngIf="tentativas >= 3">
+  <p>Não sou um Medabot</p>
+  <re-captcha siteKey="6Lc_SEYeAAAAABDriNFirQpp5E0xMFI1RY9x7Tk8" (resolved)="resolverCaptcha($event)">
+  </re-captcha>
+</div>
+<div [hidden]="!captcha"></div>
 <div mat-dialog-actions></div>

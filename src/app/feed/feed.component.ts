@@ -31,7 +31,7 @@ export class FeedComponent {
       return this.itensfeed$
     })
   );
-
+    //teste de commit
   constructor(
     private breakpointObserver: BreakpointObserver,
     private feedService: DashboardService,

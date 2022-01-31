@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { delay, first, tap } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Generos } from './../modelos/generos';
 
@@ -21,6 +22,16 @@ export class GenerosService {
       first(),//traz o primeiro resultado a execução do método. Somente pega novamente os dados do EndPoint caso tenha um carregamento do método listagemGeneros. Isso ajuda na demanda para que n fique atualizando a cada mudança feita no EndPoint
       tap()
       //pega o observable(JSON) e descontroi ele para que se adeque somente a minha interface Generos e não tenha mais os métodos do RXJS em seu prototype
+    )
+  }
+
+  pesquisar(genero: string){
+    return this.clienteDados.get<Generos[]>(this.urlAPI)
+    .pipe(
+      first(),
+      delay(200),
+      map(res => res.filter(i => (i.nomeGenero.toLowerCase()).startsWith(genero.toLowerCase()))),
+      // tap(apiGeneros => console.log(apiGeneros))
     )
   }
 }

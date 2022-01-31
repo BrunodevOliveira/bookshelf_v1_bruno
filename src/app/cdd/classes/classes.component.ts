@@ -1,9 +1,10 @@
 import { AppDialogosComponent } from './../../app-compartilhado/app-dialogos/app-dialogos.component';
 import { GenerosService } from './../service/generos.service';
 import { Generos } from './../modelos/generos';
-import { Component, OnInit } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { catchError, debounceTime, distinctUntilChanged, filter, fromEvent, Observable, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -11,12 +12,14 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './classes.component.html',
   styleUrls: ['./classes.component.scss']
 })
-export class ClassesComponent implements OnInit {
+export class ClassesComponent implements OnInit, AfterViewInit {
 
   //Olha o que foi trazido no pacote HTML e observa se esses dados cabem na interface Generos
   //Esse $ serve para identificar que é um observable
   livrosGeneros$: Observable <Generos []>
   visaoColunas= ['_idGenero','nomeGenero', 'decimalGenero']
+  formulario!: FormGroup
+  result$?: Observable<Generos[]>
 
   //Importo o MAtDialog para utilizar os métodos dele e abrir o dialogo criado em app-dialogos.component.ts
   constructor(private generosService: GenerosService, public dialogo:MatDialog ) {
@@ -32,6 +35,26 @@ export class ClassesComponent implements OnInit {
 
   }
 
+  @ViewChild('searchInput') searchInput!: ElementRef
+
+  ngAfterViewInit(): void {
+    fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+      filter(Boolean),
+      debounceTime(400),
+      distinctUntilChanged(),
+      tap(() => {
+        const query = this.searchInput.nativeElement.value
+        // console.log(query)
+        if(query) {
+          this.result$ = this.generosService.pesquisar(query)
+          // console.log(this.result$)
+        } else {
+          this.result$ = undefined
+        }
+      })
+    ).subscribe()
+  }
+
   //Utilizo o método open() importado de Matdialog e passo como parâmetro o componente em que esse dialogo está sendo utilizado. Em seguida passo um objeto com a propriedade [data] que terá receber a msg passada no parêmetro da função abrirDialogoErro()
   abrirDialogoErro(errMsg: string) {
     this.dialogo.open(AppDialogosComponent, {
@@ -41,6 +64,9 @@ export class ClassesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.formulario = new FormGroup({
+      genero: new FormControl('')
+    })
   }
 
 }

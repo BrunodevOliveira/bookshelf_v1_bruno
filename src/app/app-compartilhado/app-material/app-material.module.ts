@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatInputModule} from '@angular/material/input';
 
 
 //Injetores--> são módulos que exporta algo para dentro dos outros módulos
@@ -24,6 +25,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatBadgeModule,
     MatGridListModule,
     MatMenuModule,
+    MatInputModule,
   ]
 })
 export class AppMaterialModule { }

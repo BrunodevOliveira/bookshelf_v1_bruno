@@ -4,8 +4,24 @@
   <!-- Campo de pesquisa -->
   <div class="resultado-pesquisa">
 
-    <div class="container-ps">
+    <!-- <div class="container-ps">
       <input class="inputUser" matInput #searchInput placeholder="Busque por gênero"/>
+    </div> -->
+
+    <!-- <mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>Busque por gênero</mat-label>
+      <input matInput type="text" #searchInput>
+      <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field> -->
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Buscar</mat-label>
+        <input matInput #searchInput />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
     </div>
 
     <div *ngIf="result$ | async as search">

@@ -20,6 +20,7 @@ export class ClassesComponent implements OnInit, AfterViewInit {
   visaoColunas= ['_idGenero','nomeGenero', 'decimalGenero']
   formulario!: FormGroup
   result$?: Observable<Generos[]>
+  value!: string;
 
   //Importo o MAtDialog para utilizar os métodos dele e abrir o dialogo criado em app-dialogos.component.ts
   constructor(private generosService: GenerosService, public dialogo:MatDialog ) {
@@ -46,7 +47,14 @@ export class ClassesComponent implements OnInit, AfterViewInit {
         const query = this.searchInput.nativeElement.value
         // console.log(query)
         if(query) {
-          this.result$ = this.generosService.pesquisar(query)
+          if(this.generosService.pesquisar(query) === this.generosService.pesquisar('ee')){
+            console.log('entrou no if')
+            this.result$ = undefined
+          } else {
+            console.log('entrou no else')
+            this.result$ = this.generosService.pesquisar(query)
+          }
+
           // console.log(this.result$)
         } else {
           this.result$ = undefined
